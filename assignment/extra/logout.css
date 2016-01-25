@@ -1,0 +1,9 @@
+.out{
+	 width: 500px;
+    padding: 100px;
+    border: 25px solid gray;
+    margin: 35px;
+}
+.in{
+	text-align: center;
+}
