@@ -169,7 +169,9 @@ footer p {
     .nav>li>a {
         padding: 35px;
     }
-
+    .form_error{
+        border-color: red;
+    }
     .navbar-nav>li>a {
         line-height: normal;
     }
