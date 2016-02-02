@@ -58,35 +58,21 @@ if ($value=$_SESSION['id']) {//checking session id
       $count = 0;   //counter for error checking
      
      if($_FILES["photo"]["name"]){
-           $target_dir = "/var/www/html/example/registration/image/$photo";
+           $target_dir = "/var/www/html/project/assignment/image/$photo";
            $target_file = $target_dir . basename($_FILES["photo"]["name"]);
            $photo = basename($_FILES["photo"]["name"]);
            $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-           $check = getimagesize($_FILES["photo"]["tmp_name"]);
-           if($check !== false) {
-              $count = 0;
-           } else {
+           if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif" ){
+              move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
+           }
+           else {
             echo "<center><strong>*File is not an image.</strong></center>";
             $count++;
           }
-
-          if ($count != 0) {
-            echo "<center><strong>*Sorry, your file was not uploaded.</strong></center>";
-              // if everything is ok, try to upload file
-          } 
-          else {
-            if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-
-            }
-            else {
-             echo "<center><strong>*Sorry, there was an error uploading your file.</strong></center>";
-           }
-          }
-         }
+        }
     else{
       $photo = $profile['photo'];
-  }
+    }
 
       // validation
 

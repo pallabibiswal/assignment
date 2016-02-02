@@ -41,7 +41,7 @@ ob_start();
        $count=0;//counter for error checking
         //uploading file and validating 
       if ($_FILES['photo']['name']) {
-       $target_dir = "/var/www/html/example/registration/image/$photo";
+       $target_dir = "/var/www/html/project/assignment/image/$photo";
        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
        $photo = basename($_FILES["photo"]["name"]);
        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
