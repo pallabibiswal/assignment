@@ -1,75 +1,60 @@
 <?php
-
+//ini_set('display_errors','On');
+//error_reporting(E_ALL);
 session_start();                           
 ob_start();
-	require_once("dbinfo.php");
+  require_once("dbinfo.php");
   require_once("header.php");
-	
-  if(isset($_POST['submit']))
+    if(isset($_POST['submit']))
   {
   //storing  field values
 
-       $first= trim($_POST['first']);
-       $last=trim($_POST['last']);
-       $middle = trim($_POST['middle']);
-       $suffix = trim($_POST['suffix']);
-       $dob =trim($_POST['dob']);
-       $email=trim($_POST['email']);
+       $first      = trim($_POST['first']);
+       $last       = trim($_POST['last']);
+       $middle     = trim($_POST['middle']);
+       $suffix     = trim($_POST['suffix']);
+       $dob        = trim($_POST['dob']);
+       $email      = trim($_POST['email']);
        $employement= trim($_POST['employement']);
-       $employer=trim($_POST['employer']);
-       $gender =trim($_POST['gender']);
-       $status = trim($_POST['status']);
-       $rstreet=trim($_POST['rstreet']);
-       $rcity = trim($_POST['rcity']);
-       $rstate =trim($_POST['rstate']);
-       $rpin=trim($_POST['rpin']);
-       $rphone= trim($_POST['rphone']);
-       $rfax=trim($_POST['rfax']);
-       $ostreet = trim($_POST['ostreet']);
-       $ocity = trim($_POST['ocity']);
-       $ostate =trim($_POST['ostate']);
-       $opin=trim($_POST['opin']);
-       $ophone= trim($_POST['ophone']);
-       $ofax= trim($_POST['ofax']);
-       $password=trim($_POST['password']);
-       $repassword=trim($_POST['repassword']);
-       $extra =addslashes($_POST['extra']);
-       $mail=trim($_POST['mail']);
-       $message=trim($_POST['message']);
-       $phonecall=trim($_POST['phonecall']);
+       $employer   = trim($_POST['employer']);
+       $gender     = trim($_POST['gender']);
+       $status     = trim($_POST['status']);
+       $rstreet    = trim($_POST['rstreet']);
+       $rcity      = trim($_POST['rcity']);
+       $rstate     = trim($_POST['rstate']);
+       $rpin       = trim($_POST['rpin']);
+       $rphone     = trim($_POST['rphone']);
+       $rfax       = trim($_POST['rfax']);
+       $ostreet    = trim($_POST['ostreet']);
+       $ocity      = trim($_POST['ocity']);
+       $ostate     = trim($_POST['ostate']);
+       $opin       = trim($_POST['opin']);
+       $ophone     = trim($_POST['ophone']);
+       $ofax       = trim($_POST['ofax']);
+       $password   = trim($_POST['password']);
+       $repassword = trim($_POST['repassword']);
+       $extra      = addslashes($_POST['extra']);
+       $mail       = trim($_POST['mail']);
+       $message    = trim($_POST['message']);
+       $phonecall  = trim($_POST['phonecall']);
 
        $count=0;//counter for error checking
         //uploading file and validating 
+      if ($_FILES['photo']['name']) {
        $target_dir = "/var/www/html/example/registration/image/$photo";
        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
        $photo = basename($_FILES["photo"]["name"]);
        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-       $check = getimagesize($_FILES["photo"]["tmp_name"]);
-       if($check !== false) {
-           $count = 0;
-       } else {
-        echo "<center><strong>*File is not an image.</strong></center>";
-        $count++;
-      }
-
-      if ($count != 0) {
-        echo "<center><strong>*Sorry, your file was not uploaded.</strong></center>";
-          // if everything is ok, try to upload file
-      } 
-      else {
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-
+        if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif" ){
+          move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
         }
         else {
-         echo "<center><strong>*Sorry, there was an error uploading your file.</strong></center>";
-       }
+        echo "<center><strong>*File is not an image.</strong></center>";
+        $count++;
+        }
       }
 
     //validation of user input
- 		
- 	
-    
        if (empty($first)) {
                 $error = "<p><strong>*Give your first name</strong></p>";
                 echo "<center>{$error}</center>"; 
@@ -221,9 +206,6 @@ ob_start();
                 echo "<center>{$error}</center>"; 
                    $count++; 
         }
- 
-
-
      //insert into database
         if($count==0){
           
@@ -251,11 +233,7 @@ ob_start();
           } 
        }
     }
-
 ?>
-
-
-
 <body>
 	<div class="container">
     <div>
@@ -263,66 +241,76 @@ ob_start();
     </div>
 			<div class="col-lg-12 well">
 				<div class="row">
-					<form action="registration.php" method="POST" enctype="multipart/form-data">
+					<form action="registration.php" method='post' enctype="multipart/form-data" name = 'validate_form'>
 						<div class="col-sm-12">
 							<div class="row">
+              <div class = "row">
 								<div class="col-sm-3 form-group">
 									<label>First Name</label>
-									<input type="text" placeholder="Enter first name" class="form-control" name="first" value="<?php echo $_POST['first']; ?> "/>
-								</div>
+									<input type="text" id="first_input" placeholder="Enter first name" class="form-control" name='first' value="<?php echo $_POST['first']; ?> "/>
+								  <div id="first_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Last Name</label>
-									<input type="text" placeholder="Enter last name" class="form-control" name="last" value="<?php echo $_POST['last']; ?> "></p></br>
-								</div>
+									<input type="text" id="last_input" placeholder="Enter last name" class="form-control" name="last" value="<?php echo $_POST['last']; ?> ">
+								  <div id="last_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Middle Name</label>
-									<input type="text" placeholder="Enter middle name" class="form-control" name="middle" value="<?php echo $_POST['middle']; ?> ">
-								</div>
+									<input type="text" id = "middle_input" placeholder="Enter middle name" class="form-control" name="middle" value="<?php echo $_POST['middle']; ?> ">
+								  <div id="middle_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Suffix</label>
-									<input type="text" placeholder="Enter suffix" class="form-control" name="suffix" value="<?php echo $_POST['suffix']; ?> "></p></br>
-								</div>
-
+									<input type="text" id ="suffix_input" placeholder="Enter suffix" class="form-control" name="suffix" value="<?php echo $_POST['suffix']; ?> ">
+								  <div id="suffix_error"></div>
+                </div>
+              </div>
+              <div class = "row">
                 <div class="col-sm-3 form-group">
-									 <label>Employement:</label>
-      									<select class="form-control" name="employement">
-        									<option name="student" value="student">Student</option>
-        									<option name="employed" value="employed">Employee</option>
-        									<option name="unemployed" value="unemployed">Unemployed</option>
-        									<option name="other" value="other">Other</option>
-      									</select>
+									<label>Employement:</label>
+      							<select class="form-control" name="employement">
+        							<option name="student" value="student">Student</option>
+        							<option name="employed" value="employed">Employee</option>
+        							<option name="unemployed" value="unemployed">Unemployed</option>
+        							<option name="other" value="other">Other</option>
+      							</select>
 								</div>
 								<div class="col-sm-3 form-group">
 									<label>Employer</label>
-									<input type="text" placeholder="Employer" class="form-control" name="Employer" value="<?php echo $_POST['employer']; ?> "></p></br>
-								</div>
+									<input type="text" id="employer_input" placeholder="Employer" class="form-control" name="employer" value="<?php echo $_POST['employer']; ?> ">
+								  <div id="employer_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Date Of Birth</label>
-									<input type="date" placeholder="Date Of Birth" class="form-control" name="dob">
-								</div>
+									<input type="date" id= "dob_input" placeholder="Date Of Birth" class="form-control" name="dob">
+								  <div id="dob_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Email</label>
-									<input type="text" placeholder="Enter Email" class="form-control" name="email" value="<?php echo $_POST['email']; ?> "></p></br>
-								</div>
-                            
+									<input type="text" id="email_input" placeholder="Enter Email" class="form-control" name="email" value="<?php echo $_POST['email']; ?> ">
+								  <div id="email_error"></div>
+                </div>
+              </div>
+              <div class = "row">             
                 <div class="col-sm-6 form-group">
                   <label>Gender:</label>
-								    <div class="radio-inline">
-     			 						<label><input type="radio" name="gender" value="male" checked/>Male</label>
-   		 						  </div>
-   		 							<div class="radio-inline">
-      									<label><input type="radio" name="gender" value="female"/>Female</label>
-      							</div>
+								  <div class="radio-inline">
+     			 					<label><input type="radio" name="gender" value="male" checked/>Male</label>
+   		 						</div>
+   		 						<div class="radio-inline">
+      							<label><input type="radio" name="gender" value="female"/>Female</label>
+      						</div>
 								</div>
                             
                 <div class="col-sm-6 form-group">
     								<label>Marital status:</label>
 									<div class="radio-inline">
-     			 						<label><input type="radio" name="status" value="married" checked/>Married</label>
+     			 					<label><input type="radio" name="status" value="married" checked/>Married</label>
    		 						</div>
-   		 							<div class="radio-inline">
-      								<label><input type="radio" name="status" value="unmarried" />Unmarried</label>
-    								</div>
+   		 						<div class="radio-inline">
+      							<label><input type="radio" name="status" value="unmarried" />Unmarried</label>
+    							</div>
 								</div>
               </div>
 
@@ -334,48 +322,54 @@ ob_start();
 										  <label>Street:</label>
 									  </div>
 									  <div class="col-sm-9">
-										  <input type="text" placeholder="street" name="rstreet" value="<?php echo $_POST['rstreet']; ?> "/>
-									  </div> 
+										  <input type="text" id="rstreet_input" placeholder="street" name="rstreet" value="<?php echo $_POST['rstreet']; ?> "/>
+									    <div id="rstreet_error"></div>
+                    </div> 
 									</div>
 									<div class="row">
 									  <div class="col-sm-3 form-group">
 										  <label>City:</label>
 									  </div>
 									  <div class="col-sm-9">
-										  <input type="text" placeholder="city" name="rcity" value="<?php echo $_POST['rcity']; ?> "/>
-									  </div>
+										  <input type="text" id="rcity_input" placeholder="city" name="rcity" value="<?php echo $_POST['rcity']; ?> "/>
+									    <div id="rcity_error"></div>
+                    </div>
 									</div>
 									<div class="row">
 									  <div class="col-sm-3 form-group">
 										  <label>State:</label>
 									  </div>
 									  <div class="col-sm-9">
-										  <input type="text" placeholder="state" name="rstate" value="<?php echo $_POST['rstate']; ?> "/>
-									  </div> 
+										  <input type="text" id="rstate_input" placeholder="state" name="rstate" value="<?php echo $_POST['rstate']; ?> "/>
+									    <div id="rstate_error"></div>
+                    </div> 
 									</div>
 									<div class="row">
 									  <div class="col-sm-3 form-group">
 										  <label>Pin:</label>
 									  </div>
 									  <div class="col-sm-9">
-										  <input type="text" placeholder="pin" name="rpin" value="<?php echo $_POST['rpin']; ?> "/>
-									  </div> 
+										  <input type="text" id="rpin_input" placeholder="pin" name="rpin" value="<?php echo $_POST['rpin']; ?> "/>
+									    <div id="rpin_error"></div>
+                    </div> 
 									</div>
 									<div class="row">
 									  <div class="col-sm-3 form-group">
 										  <label>Phone:</label>
 									  </div>
 									  <div class="col-sm-9">
-										  <input type="text" placeholder="phone" name="rphone" value="<?php echo $_POST['rphone']; ?> "/>
-									  </div>
+										  <input type="text" id="rphone_input" placeholder="phone" name="rphone" value="<?php echo $_POST['rphone']; ?> "/>
+									    <div id="rphone_error"></div>
+                    </div>
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>Fax:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="fax" name="rfax" value="<?php echo $_POST['rfax']; ?> "/>
-									</div>
+										<input type="text" id="rfax_input" placeholder="fax" name="rfax" value="<?php echo $_POST['rfax']; ?> "/>
+									  <div id="rfax_error"></div>
+                  </div>
 									</div>
 								</div>
 
@@ -387,108 +381,116 @@ ob_start();
 										<label>Street:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="street" name="ostreet" value="<?php echo $_POST['ostreet']; ?> "/>
-									</div> 
+										<input type="text" id="ostreet_input" placeholder="street" name="ostreet" value="<?php echo $_POST['ostreet']; ?> "/>
+									  <div id="ostreet_error"></div>
+                  </div> 
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>City:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="city" name="ocity" value="<?php echo $_POST['ocity']; ?> "/>
-									</div>
+										<input type="text" id="ocity_input" placeholder="city" name="ocity" value="<?php echo $_POST['ocity']; ?> "/>
+									  <div id="ocity_error"></div>
+                  </div>
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>State:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="state" name="ostate" value="<?php echo $_POST['ostate']; ?> "/>
-									</div> 
+										<input type="text" id="ostate_input" placeholder="state" name="ostate" value="<?php echo $_POST['ostate']; ?> "/>
+									  <div id="ostate_error"></div>
+                  </div> 
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>Pin:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="pin" name="opin" value="<?php echo $_POST['opin']; ?> "/>
-									</div> 
+										<input type="text" id="opin_input" placeholder="pin" name="opin" value="<?php echo $_POST['opin']; ?> "/>
+									  <div id="opin_error"></div>
+                  </div> 
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>Phone:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="phone" name="ophone" value="<?php echo $_POST['ophone']; ?> "/>
-									</div>
+										<input type="text" id="ophone_input" placeholder="phone" name="ophone" value="<?php echo $_POST['ophone']; ?> "/>
+									   <div id="ophone_error"></div>
+                  </div>
 									</div>
 									<div class="row">
 									<div class="col-sm-3 form-group">
 										<label>Fax:</label>
 									</div>
 									<div class="col-sm-9">
-										<input type="text" placeholder="fax" name="ofax" value="<?php echo $_POST['ofax']; ?> "/>
-									</div>
+										<input type="text" id="ofax_input" placeholder="fax" name="ofax" value="<?php echo $_POST['ofax']; ?> "/>
+									  <div id="ofax_error"></div>
+                  </div>
 									</div>
 								</div>
                 </div><br/><br/><br/>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="row">
-											         <div class="col-md-3 form-group">
-												          <label>Password:</label>
-											         </div>
-											         <div class="col-md-9">
-												          <input type="password" placeholder="type.." name="password" />
-											         </div>
-									         </div>
-                          <div class="row">
-											       <div class="col-md-3 form-group">
-												          <label>Re type Password:</label>
-											       </div>
-											       <div class="col-md-9">
-												        <input type="password" placeholder="retype.." name="repassword"/>
-											       </div>
-										      </div>
-									      </div><br/>
-									    <div class="col-md-6">
-										    <div class="col-md-12">
-                          <div class="col-md-3">
-                            	<label>Select photo:</label>
-                          </div>
-                          <div class="col-md-9">	 
-                            	<input type="file" name="photo" id="photo" accept="image/x-png, image/gif, image/jpeg"/>
-                          </div>
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <div class="row">
+											  <div class="col-md-3 form-group">
+												  <label>Password:</label>
+											  </div>
+											  <div class="col-md-9">
+												  <input id='password_input' type="password" placeholder='type..' name="password" >
+											    <div id="password_error"></div>
                         </div>
 									    </div>
-								    </div>
-                </div> <br/><br/>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-3">
-                            <label>Extra Note:</label>
-                        </div>
-                        <div class="col-md-9">	
-                            <textarea rows="5" id="extra" name="extra" value="<?php echo $_POST['extra']; ?> "></textarea>
-                        </div>
+                      <div class="row">
+											  <div class="col-md-3 form-group">
+												  <label>Re type Password:</label>
+											  </div>
+											    <div class="col-md-9">
+												    <input type="password" placeholder="retype.." name="repassword" id="repassword_input"/>
+											    <div id="repassword_error"></div>
+                      </div>
+										</div>
+									</div><br/>
+									<div class="col-md-6">
+										<div class="col-md-12">
+                      <div class="col-md-3">
+                        <label>Select photo:</label>
+                      </div>
+                      <div class="col-md-9">	 
+                        <input type="file" name="photo" id="photo" accept="image/x-png, image/gif, image/jpeg"/>
+                      </div>
                     </div>
-                </div><br/><br/>
-							   <div>
-								  <label>Communication Medium:</label><br/>
-								 <div class="checkbox-inline">
-      								<label><input type="checkbox" name="mail" value="mail" checked>mail</label>
-    							</div>
-    							<div class="checkbox-inline">
-      								<label><input type="checkbox" name="message" value="message"/>message</label>
-   					 			</div>
-    							<div class="checkbox-inline">
-     						 		<label><input type="checkbox" name="phonecall" value="phonecall"/>Phone call</label>
-    							</div>
+									</div>
+								</div>
+              </div> <br/><br/>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-3">
+                    <label>Extra Note:</label>
+                  </div>
+                  <div class="col-md-9">	
+                    <textarea rows="5" id="extra" name="extra" value="<?php echo $_POST['extra']; ?> "></textarea>
+                  </div>
+                </div>
+              </div><br/><br/>
+							<div>
+								<label>Communication Medium:</label><br/>
+							  <div class="checkbox-inline">
+      						<label><input type="checkbox" name="mail" value="mail" checked>mail</label>
+    						</div>
+    						<div class="checkbox-inline">
+      						<label><input type="checkbox" name="message" value="message"/>message</label>
+   					 		</div>
+    						<div class="checkbox-inline">
+     						 	<label><input type="checkbox" name="phonecall" value="phonecall"/>Phone call</label>
+    						</div>
 							</div><br/><br/>
 			
 							<div class="col-md-12">
-								<button type="submit" class="btn btn-lg btn-info " name="submit" value="submit">Submit</button>					
+								<input type="submit" id='submit' class="btn btn-lg btn-info submit_button" name='submit' value="submit" >
 							</div>
 								
 						</div>
@@ -496,7 +498,6 @@ ob_start();
 				</div>
 			</div>
 		</div> 
-
 <?php
 require_once("footer.php");
 ?>

@@ -29,33 +29,33 @@ if ($value=$_SESSION['id']) {//checking session id
 	//if update button is clicked
 	if($up=$_POST['update']){			
 
-		   $first=trim($_POST['first']);
-       $last=trim($_POST['last']);
-       $middle = trim($_POST['middle']);                
-       $suffix = trim($_POST['suffix']);
-       $dob =trim($_POST['dob']);
-       $email=trim($_POST['email']);
+		   $first      = trim($_POST['first']);
+       $last       = trim($_POST['last']);
+       $middle     = trim($_POST['middle']);                
+       $suffix     = trim($_POST['suffix']);
+       $dob        = trim($_POST['dob']);
+       $email      = trim($_POST['email']);
        $employement= trim($_POST['employement']);
-       $employer=trim($_POST['employer']);
-       $gender = trim($_POST['gender']);
-       $status = trim($_POST['status']);
-       $rstreet=trim($_POST['rstreet']);
-       $rcity = trim($_POST['rcity']);
-       $rstate = trim($_POST['rstate']);
-       $rpin=trim($_POST['rpin']);
-       $rphone= trim($_POST['rphone']);
-       $rfax= trim($_POST['rfax']);
-       $ostreet = trim($_POST['ostreet']);
-       $ocity = trim($_POST['ocity']);
-       $ostate = trim($_POST['ostate']);
-       $opin=trim($_POST['opin']);
-       $ophone= trim($_POST['ophone']);
-       $ofax= trim($_POST['ofax']);
-       $password=trim($_POST['password']);
-       $repassword=trim($_POST['repassword']);
-       $extra = addslashes($_POST['extra']);
+       $employer   = trim($_POST['employer']);
+       $gender     = trim($_POST['gender']);
+       $status     = trim($_POST['status']);
+       $rstreet    = trim($_POST['rstreet']);
+       $rcity      = trim($_POST['rcity']);
+       $rstate     = trim($_POST['rstate']);
+       $rpin       = trim($_POST['rpin']);
+       $rphone     = trim($_POST['rphone']);
+       $rfax       = trim($_POST['rfax']);
+       $ostreet    = trim($_POST['ostreet']);
+       $ocity      = trim($_POST['ocity']);
+       $ostate     = trim($_POST['ostate']);
+       $opin       = trim($_POST['opin']);
+       $ophone     = trim($_POST['ophone']);
+       $ofax       = trim($_POST['ofax']);
+       $password   = trim($_POST['password']);
+       $repassword = trim($_POST['repassword']);
+       $extra      = addslashes($_POST['extra']);
 
-      $count=0;   //counter for error checking
+      $count = 0;   //counter for error checking
      
      if($_FILES["photo"]["name"]){
            $target_dir = "/var/www/html/example/registration/image/$photo";
@@ -88,7 +88,7 @@ if ($value=$_SESSION['id']) {//checking session id
       $photo = $profile['photo'];
   }
 
-  // validation
+      // validation
 
            if (empty($first)) {
                     $error = "<p><strong>*Give your first name</strong></p>";
@@ -228,15 +228,13 @@ if ($value=$_SESSION['id']) {//checking session id
         $que = "SELECT pk_users FROM users WHERE email='$email' AND pk_users = '$value'";    
         $in = mysqli_query($db,$value);
         if($in && mysqli_fetch_assoc($in)){
-         			$error ="<p><strong>*That email id is already exist</strong></p>";
-                    echo "<center>{$error}</center>"; 
-                       $count++; 
-           } 
+         	$error ="<p><strong>*That email id is already exist</strong></p>";
+            echo "<center>{$error}</center>"; 
+            $count++; 
+        } 
 
-           //update in database if there are no errors
+     //update in database if there are no errors
      if($count==0){
-
-
        $query  = "UPDATE users SET first='$first',last='$last',middle='$middle',suffix='$suffix',dob='$dob',email='$email',";
        $query .="employement ='$employement',employer ='$employer',gender ='$gender',status ='$status',photo ='$photo',";
        $query .="rstreet ='$rstreet',rcity ='$rcity',rstate ='$rstate', rpin='$rpin',rphone ='$rphone',rfax ='$rfax',";
@@ -267,195 +265,219 @@ function displayVal($field,$profile){
 
 <body>
 	<div class="container">
-    	<div>
+    <div>
 			<h1 class="well cen">Update Data</h1>
-    	</div>
-			<div class="col-lg-12 well">
-				
-				<div class="row">
-					<form action="update.php" method="POST" enctype="multipart/form-data">
-						<div class="col-sm-12">
-							<div class="row">
+    </div>
+		<div class="col-lg-12 well">
+			<div class="row">
+				<form action="update.php" method="post" enctype="multipart/form-data" name = "validate_form">
+					<div class="col-sm-12">
+						<div class="row">
+              <div class ="row">
 								<div class="col-sm-3 form-group">
 									<label>First Name</label>
-									<input type="text" class="form-control" name="first" value="<?php displayVal("first",$profile); ?>"/>
-								</div>
+									<input type="text" id="first_input" class="form-control" name="first" value="<?php displayVal("first",$profile); ?>"/>
+								  <div id="first_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Last Name</label>
-									<input type="text" class="form-control" name="last" value="<?php displayVal("last",$profile); ?>"/></p></br>
-								</div>
+									<input type="text" id="last_input" class="form-control" name="last" value="<?php displayVal("last",$profile); ?>"/>
+								  <div id="last_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Middle Name</label>
-									<input type="text" class="form-control" name="middle" value="<?php displayVal("middle",$profile); ?>" />
-								</div>
+									<input type="text" id="middle_input" class="form-control" name="middle" value="<?php displayVal("middle",$profile); ?>" />
+								  <div id="middle_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Suffix</label>
-									<input type="text"  class="form-control" name="suffix" value="<?php displayVal("suffix",$profile); ?>" /></p></br>
-								</div>
-
+									<input type="text" id="suffix_input" class="form-control" name="suffix" value="<?php displayVal("suffix",$profile); ?>" />
+								  <div id="suffix_error"></div>
+                </div>
+              </div>
+              <div class="row">
 								<div class="col-sm-3 form-group">
 									 <label>Employement:</label>
-      								 <input type="text"  class="form-control" name="employement" value="<?php displayVal("employement",$profile); ?>" /></p></br>	
-								</div>
+      						 <input type="text" id="employement_input" class="form-control" name="employement" value="<?php displayVal("employement",$profile); ?>" /></p></br>	
+								   <div id="employement_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Employer</label>
-									<input type="text"  class="form-control" name="employer" value="<?php displayVal("employer",$profile); ?>" /></p></br>
-								</div>
+									<input type="text" id="employer_input" class="form-control" name="employer" value="<?php displayVal("employer",$profile); ?>" /></p></br>
+								  <div id="employer_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Date Of Birth</label>
-									<input type="date" class="form-control" name="dob" value="<?php displayVal("dob",$profile); ?>"/ >
-								</div>
+									<input type="date" id="dob_input" class="form-control" name="dob" value="<?php displayVal("dob",$profile); ?>"/ >
+								  <div id="dob_error"></div>
+                </div>
 								<div class="col-sm-3 form-group">
 									<label>Email</label>
-									<input type="text"  class="form-control" name="email" value="<?php displayVal("email",$profile); ?>"></p></br>
-								</div>
-                                       
+									<input type="text" id="email_input" class="form-control" name="email" value="<?php displayVal("email",$profile); ?>">
+								  <div id="email_error"></div>
+                </div>
+              </div>  
+              <div class="row">                       
                 <div class="col-sm-6 form-group">
                   <label>Gender:</label>
-									<input type="text"  class="form-control" name="gender" value="<?php displayVal("gender",$profile); ?>"/></p></br>
-								</div>
-                            
-                  <div class="col-sm-6 form-group">
-    								<label>Marital status:</label>
-									<input type="text"  class="form-control" name="status" value="<?php displayVal("status",$profile); ?>"/></p></br>
-								</div>
+									<input type="text" id="gender_input"  class="form-control" name="gender" value="<?php displayVal("gender",$profile); ?>"/>
+								  <div id="gender_error"></div>
+                </div>
+                           
+                <div class="col-sm-6 form-group">
+    							<label>Marital status:</label>
+									<input type="text" id="status_input" class="form-control" name="status" value="<?php displayVal("status",$profile); ?>"/>
+								<div id="status_error"></div>
               </div>
-
-              <div class="row">
-								<div class="col-sm-6">
-										<label><h3>Residential Address</h3></label>	
-                  <div class="row">
-                    <div class="col-sm-3 form-group">
-										<label>Street:</label>
-									 </div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="street" name="rstreet" value="<?php displayVal("rstreet",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>City:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="city" name="rcity" value="<?php displayVal("rcity",$profile); ?>"/>
-									</div>
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>State:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="state" name="rstate" value="<?php displayVal("rstate",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Pin:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="pin" name="rpin" value="<?php displayVal("rpin",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Phone:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="phone" name="rphone" value="<?php displayVal("rphone",$profile); ?>"/>
-									</div>
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Fax:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="fax" name="rfax" value="<?php displayVal("rfax",$profile); ?>"/>
-									</div>
-									</div>
-								</div>
-
-								<div class="col-sm-6">
-										<label><h3>Office Address</h3></label></label>	
+            </div>
+          </div>
+             
+          <div class="row">
+            <div class="col-sm-6">
+              <label><h4>Residential Address</h4></label> 
                 <div class="row">
                   <div class="col-sm-3 form-group">
-										<label>Street:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="street" name="ostreet" value="<?php displayVal("ostreet",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>City:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="city" name="ocity" value="<?php displayVal("ocity",$profile); ?>"/>
-									</div>
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>State:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="state" name="ostate" value="<?php displayVal("ostate",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Pin:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="pin" name="opin" value="<?php displayVal("opin",$profile); ?>"/>
-									</div> 
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Phone:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="phone" name="ophone" value="<?php displayVal("ophone",$profile); ?>"/>
-									</div>
-									</div>
-									<div class="row">
-									<div class="col-sm-3 form-group">
-										<label>Fax:</label>
-									</div>
-									<div class="col-sm-9">
-										<input type="text" placeholder="fax" name="ofax" value="<?php displayVal("ofax",$profile); ?>"/>
-									</div>
-									</div>
-								</div>
-              </div><br/><br/><br/>
-                            
+                    <label>Street:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" id="rstreet_input" placeholder="street" name="rstreet" value="<?php displayVal("rstreet",$profile); ?> "/>
+                  <div id="rstreet_error"></div>
+                </div> 
+              </div>
               <div class="row">
-                  <div class="col-md-6">
-                      <div class="col-md-3">
-                          <label>Extra Note:</label>
-                      </div>
-                      <div class="col-md-10">	 
-                          <input type="text"  id="extra" name="extra" value="<?php displayVal("extra",$profile); ?>"/>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                       <div class="col-md-3">
-                          <label>Select photo:</label>
-                        </div>
-                        <div class="col-md-9">
-                          <img width="130" height="140" src="image/<?php echo $profile['photo']; ?>"/><br/>	 
-                          <input type="file" name="photo" value="<?php echo $profile['photo']; ?>" accept="image/x-png, image/gif, image/jpeg"/>
-                        </div>
-                      </div>
-              </div><br/><br/>
+                <div class="col-sm-3 form-group">
+                  <label>City:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="rcity_input" placeholder="city" name="rcity" value="<?php displayVal("rcity",$profile); ?> "/>
+                  <div id="rcity_error"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>State:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="rstate_input" placeholder="state" name="rstate" value="<?php displayVal("rstate",$profile); ?> "/>
+                  <div id="rstate_error"></div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Pin:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="rpin_input" placeholder="pin" name="rpin" value="<?php displayVal("rpin",$profile);?> "/>
+                <div id="rpin_error"></div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Phone:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="rphone_input" placeholder="phone" name="rphone" value="<?php displayVal("rphone",$profile);?> "/>
+                  <div id="rphone_error"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Fax:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="rfax_input" placeholder="fax" name="rfax" value="<?php displayVal("rfax",$profile);?> "/>
+                <div id="rfax_error"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">  
+            <label><h4>Office Address</h4></label>  
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Street:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="ostreet_input" placeholder="street" name="ostreet" value="<?php displayVal("ostreet",$profile);?> "/>
+                  <div id="ostreet_error"></div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>City:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="ocity_input" placeholder="city" name="ocity" value="<?php displayVal("ocity",$profile); ?> "/>
+                  <div id="ocity_error"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>State:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="ostate_input" placeholder="state" name="ostate" value="<?php displayVal("ostate",$profile);?> "/>
+                  <div id="ostate_error"></div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Pin:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="opin_input" placeholder="pin" name="opin" value="<?php displayVal("opin",$profile);?> "/>
+                  <div id="opin_error"></div>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Phone:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="ophone_input" placeholder="phone" name="ophone" value="<?php displayVal("ophone",$profile);?> "/>
+                  <div id="ophone_error"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3 form-group">
+                  <label>Fax:</label>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" id="ofax_input" placeholder="fax" name="ofax" value="<?php displayVal("ofax",$profile);?> "/>
+                  <div id="ofax_error"></div>
+                </div>
+              </div>
+            </div>
+          </div><br/><br/><br/>
+                            
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-3">
+                <label>Extra Note:</label>
+              </div>
+              <div class="col-md-10">	 
+                <input type="text"  id="extra" name="extra" value="<?php displayVal("extra",$profile); ?>"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-3">
+                <label>Select photo:</label>
+              </div>
+              <div class="col-md-9">
+                <img width="130" height="140" src="image/<?php echo $profile['photo']; ?>"/><br/>	 
+                <input type="file" name="photo" value="<?php echo $profile['photo']; ?>" accept="image/x-png, image/gif, image/jpeg"/>
+              </div>
+            </div>
+          </div><br/><br/>
 			
-							<div class="col-md-12">
-								<input type="submit" class="btn btn-lg btn-info " name="update" value="Update"/>					
-							</div>
+				  <div class="col-md-12">
+						<input type="submit" class="btn btn-lg btn-info submit_button" name="update" value="Update"/>					
+					</div>
 								
-						</div>
-					</form> 
 				</div>
-			</div>
+			</form> 
 		</div>
+	</div>
+</div>
     
 <?php
 require_once("footer.php");
