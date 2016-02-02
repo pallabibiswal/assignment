@@ -261,8 +261,6 @@ function displayVal($field,$profile){
 }
 
 ?>
-
-
 <body>
 	<div class="container">
     <div>
@@ -477,8 +475,7 @@ function displayVal($field,$profile){
 			</form> 
 		</div>
 	</div>
-</div>
-    
+</div>    
 <?php
 require_once("footer.php");
 ?>
