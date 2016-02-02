@@ -49,44 +49,45 @@ $(document).ready(function(){
                  $("#first_error").html("");
                  $("#first_input").removeClass("form_error");
             }
-
-            if (!employement.match(letters)) {
-                 errors = "\n*Please provide only letters!";
-                  $("#employement_error").css("color","red").html(errors);
-                 $("#employement_input").addClass("form_error"); 
-                  
-            }
-            else{
-                 $("#employement_error").html("");
-                 $("#employement_input").removeClass("form_error");
-            }
-            
-             if((gender == null) || (gender == "")) {
-                 errors = "Please specify your gender!";
-                 $("#gender_error").css("color","red").html(errors);
-                 $("#gender_input").addClass("form_error"); 
-                  
-            } 
-            else if (!gender.match(letters)) {
-                 errors = "\n*Please provide only letters!";
-                  $("#gender_error").css("color","red").html(errors);
-                 $("#gender_input").addClass("form_error"); 
-                  
-            }
-            else{
-                 $("#gender_error").html("");
-                 $("#gender_input").removeClass("form_error");
-            }
-            
-            if (!status.match(letters)) {
-                 errors = "\n*Please provide only letters!";
-                  $("#status_error").css("color","red").html(errors);
-                 $("#status_input").addClass("form_error"); 
-                  
-            }
-            else{
-                 $("#status_error").html("");
-                 $("#status_input").removeClass("form_error");
+            if(form_type == "update"){
+                if (!employement.match(letters)) {
+                     errors = "\n*Please provide only letters!";
+                      $("#employement_error").css("color","red").html(errors);
+                     $("#employement_input").addClass("form_error"); 
+                      
+                }
+                else{
+                     $("#employement_error").html("");
+                     $("#employement_input").removeClass("form_error");
+                }
+                
+                 if((gender == null) || (gender == "")) {
+                     errors = "Please specify your gender!";
+                     $("#gender_error").css("color","red").html(errors);
+                     $("#gender_input").addClass("form_error"); 
+                      
+                } 
+                else if (!gender.match(letters)) {
+                     errors = "\n*Please provide only letters!";
+                      $("#gender_error").css("color","red").html(errors);
+                     $("#gender_input").addClass("form_error"); 
+                      
+                }
+                else{
+                     $("#gender_error").html("");
+                     $("#gender_input").removeClass("form_error");
+                }
+                
+                if (!status.match(letters)) {
+                     errors = "\n*Please provide only letters!";
+                      $("#status_error").css("color","red").html(errors);
+                     $("#status_input").addClass("form_error"); 
+                      
+                }
+                else{
+                     $("#status_error").html("");
+                     $("#status_input").removeClass("form_error");
+                }
             }
             if ((first.length < 3) || (first.length > 30)) {
                 errors = "\n*Should be within 3-30 characters.";

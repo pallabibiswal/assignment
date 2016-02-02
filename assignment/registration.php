@@ -1,10 +1,11 @@
 <?php
+//ini_set('display_errors','On');
+//error_reporting(E_ALL);
 session_start();                           
 ob_start();
   require_once("dbinfo.php");
   require_once("header.php");
- 
-  if(isset($_POST['submit']))
+    if(isset($_POST['submit']))
   {
   //storing  field values
 
@@ -39,30 +40,18 @@ ob_start();
 
        $count=0;//counter for error checking
         //uploading file and validating 
+      if ($_FILES['photo']['name']) {
        $target_dir = "/var/www/html/example/registration/image/$photo";
        $target_file = $target_dir . basename($_FILES["photo"]["name"]);
        $photo = basename($_FILES["photo"]["name"]);
        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-       $check = getimagesize($_FILES["photo"]["tmp_name"]);
-       if($check !== false) {
-           $count = 0;
-       } else {
-        echo "<center><strong>*File is not an image.</strong></center>";
-        $count++;
-      }
-
-      if ($count != 0) {
-        echo "<center><strong>*Sorry, your file was not uploaded.</strong></center>";
-          // if everything is ok, try to upload file
-      } 
-      else {
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-
+        if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif" ){
+          move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file);
         }
         else {
-         echo "<center><strong>*Sorry, there was an error uploading your file.</strong></center>";
-       }
+        echo "<center><strong>*File is not an image.</strong></center>";
+        $count++;
+        }
       }
 
     //validation of user input
@@ -258,7 +247,7 @@ ob_start();
               <div class = "row">
 								<div class="col-sm-3 form-group">
 									<label>First Name</label>
-									<input type="text" id="first_input" placeholder="Enter first name" class="form-control" name="first" value="<?php echo $_POST['first']; ?> "/>
+									<input type="text" id="first_input" placeholder="Enter first name" class="form-control" name='first' value="<?php echo $_POST['first']; ?> "/>
 								  <div id="first_error"></div>
                 </div>
 								<div class="col-sm-3 form-group">
@@ -501,7 +490,7 @@ ob_start();
 							</div><br/><br/>
 			
 							<div class="col-md-12">
-								<button type="" id="submit" class="btn btn-lg btn-info submit_button" name="submit" value="submit" >Submit</button>					
+								<input type="submit" id='submit' class="btn btn-lg btn-info submit_button" name='submit' value="submit" >
 							</div>
 								
 						</div>
