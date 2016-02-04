@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once("dbinfo.php");
-require_once("header.php");
+require_once "dbinfo.php";
+require_once "header.php";
 
 $msg= $_SESSION['msg'];
 echo "<center><strong>{$msg}</strong></center>";
@@ -9,29 +9,29 @@ $_SESSION['msg']=null;
 
 if ($value=$_SESSION['id']) {
 
-		//fetch data from database
-      	$q = "SELECT * FROM users WHERE pk_users='$value'";
-		$result = mysqli_query($db, $q);
-		while ($row = mysqli_fetch_assoc($result)) {
-		$profile=$row;
-		}
+    //fetch data from database
+    $q = "SELECT * FROM users WHERE pk_users='$value'";
+    $result = mysqli_query($db, $q);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $profile=$row;
+    }
 
-		if(!empty($profile['mail'])){
-			$medium = $profile['mail'];
-		}
-		if(!empty($profile['message'])){
-			$medium .="/";
-			$medium .=$profile['message'];
-		}
-		if(!empty($profile['phonecall'])){
-			$medium .="/";
-			$medium .=$profile['phonecall'];
-		}
-	
-	}
-	else{
-		header("Location: login.php");
-	}
+    if(!empty($profile['mail'])) {
+        $medium = $profile['mail'];
+    }
+    if(!empty($profile['message'])) {
+        $medium .="/";
+        $medium .=$profile['message'];
+    }
+    if(!empty($profile['phonecall'])) {
+        $medium .="/";
+        $medium .=$profile['phonecall'];
+    }
+    
+}
+else{
+    header("Location: login.php");
+}
 
 ?>
 
@@ -45,7 +45,8 @@ if ($value=$_SESSION['id']) {
 				<form action="profile.php" method="POST">
 					<div class="col-sm-12">
 						<div class="row">
-							<img width="130" height="140" src="image/<?php echo $profile['photo']; ?>"/>
+							<img width="130" height="140" 
+							src="image/<?php echo $profile['photo']; ?>"/>
 						</div><br/><br/>
 						<div class="row">
 							<div class="col-sm-3 form-group">
@@ -67,7 +68,8 @@ if ($value=$_SESSION['id']) {
 
 							<div class="col-sm-3 form-group">
 								<label>Employement:</label>
-      							<?php echo $profile['employement']; ?></p></br>	
+                				<?php echo $profile['employement']; ?></p></br>	
+
 							</div>
 							<div class="col-sm-3 form-group">
 								<label>Employer:</label>
@@ -104,7 +106,7 @@ if ($value=$_SESSION['id']) {
 										<label>Street:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rstreet']; ?>
+            						<?php echo $profile['rstreet']; ?>
 									</div> 
 								</div>
 								<div class="row">
@@ -112,7 +114,7 @@ if ($value=$_SESSION['id']) {
 										<label>City:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rcity']; ?>
+            						<?php echo $profile['rcity']; ?>
 									</div>
 								</div>
 								<div class="row">
@@ -120,7 +122,7 @@ if ($value=$_SESSION['id']) {
 										<label>State:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rstate']; ?>
+            						<?php echo $profile['rstate']; ?>
 									</div> 
 								</div>
 									<div class="row">
@@ -128,7 +130,7 @@ if ($value=$_SESSION['id']) {
 										<label>Pin:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rpin']; ?>
+            						<?php echo $profile['rpin']; ?>
 									</div> 
 								</div>
 								<div class="row">
@@ -136,7 +138,7 @@ if ($value=$_SESSION['id']) {
 										<label>Phone:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rphone']; ?>
+            						<?php echo $profile['rphone']; ?>
 									</div>
 								</div>
 								<div class="row">
@@ -144,7 +146,7 @@ if ($value=$_SESSION['id']) {
 										<label>Fax:</label>
 									</div>
 									<div class="col-sm-10">
-										<?php echo $profile['rfax']; ?>
+									<?php echo $profile['rfax']; ?>
 									</div>
 								</div>
 							</div>
@@ -156,7 +158,7 @@ if ($value=$_SESSION['id']) {
 											<label>Street:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['ostreet']; ?>
+										<?php echo $profile['ostreet']; ?>
 										</div> 
 									</div>
 									<div class="row">
@@ -164,7 +166,7 @@ if ($value=$_SESSION['id']) {
 											<label>City:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['ocity']; ?>
+										<?php echo $profile['ocity']; ?>
 										</div>
 									</div>
 									<div class="row">
@@ -172,7 +174,7 @@ if ($value=$_SESSION['id']) {
 											<label>State:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['ostate']; ?>
+										<?php echo $profile['ostate']; ?>
 										</div> 
 									</div>
 									<div class="row">
@@ -180,7 +182,7 @@ if ($value=$_SESSION['id']) {
 											<label>Pin:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['opin']; ?>
+										<?php echo $profile['opin']; ?>
 										</div> 
 									</div>
 										<div class="row">
@@ -188,7 +190,7 @@ if ($value=$_SESSION['id']) {
 											<label>Phone:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['ophone']; ?>
+            							<?php echo $profile['ophone']; ?>
 										</div>
 									</div>
 									<div class="row">
@@ -196,7 +198,7 @@ if ($value=$_SESSION['id']) {
 											<label>Fax:</label>
 										</div>
 										<div class="col-sm-10">
-											<?php echo $profile['ofax']; ?>
+										<?php echo $profile['ofax']; ?>
 										</div>
 									</div>
 								</div>
@@ -208,16 +210,17 @@ if ($value=$_SESSION['id']) {
                             			<label>Extra Note:</label>
                             		</div>
                             		<div class="col-md-10">	 
-                            			<?php echo stripslashes($profile['extra']); ?>		
+                                <?php echo stripslashes($profile['extra']); ?>		
                             		</div>
                             	</div>
-                            </div><br/><br/>
+ 							<div><br/><br/>
 						</form> 
 					</div>
 				</div>
 			</div>
 		</body>
-<?php require_once("footer.php"); ?>
+<?php require_once "footer.php"; ?>
+
 
   				
 
