@@ -22,7 +22,7 @@
     <script src = "js/bootstrap.min.js"></script>
     <script type = "text/javascript" src="js/validate.js"></script>
     <script type = "text/javascript" src = "js/login.js"></script>
-    <script type = "text/javascript" src = "js/unique_email.js"></script>
+    <script type = "text/javascript" src = "js/unique_email.js?version=123"></script>
 </head>
 
 <body>
