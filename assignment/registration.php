@@ -3,8 +3,10 @@ session_start();
 ob_start();
   require_once("dbinfo.php");
   require_once("header.php");
-if(isset($_POST['submit']))
-{
+
+ 
+  if(isset($_POST['submit']))
+  {
   //storing  field values
 $first      = trim($_POST['first']);
 $last       = trim($_POST['last']);
@@ -264,7 +266,7 @@ $phonecall  = trim($_POST['phonecall']);
                             <div class = "row">
                             <div class="col-sm-3 form-group">
                 				<label>Employement:</label>
-      							<select class="form-control" name="employement">
+      							 <select class="form-control" name="employement">
         							<option name="student" value="student">Student</option>
         							<option name="employed" value="employed">Employee</option>
         							<option name="unemployed" value="unemployed">Unemployed</option>
@@ -275,12 +277,14 @@ $phonecall  = trim($_POST['phonecall']);
 									<label>Employer</label>
 									<input type="text" id="employer_input" placeholder="Employer" class="form-control" name="employer" value="<?php echo $_POST['employer']; ?> ">
 								  <div id="employer_error"></div>
-                                </div>
+              </div>
+
 								<div class="col-sm-3 form-group">
 									<label>Date Of Birth</label>
 									<input type="date" id= "dob_input" placeholder="Date Of Birth" class="form-control" name="dob">
 								  <div id="dob_error"></div>
-                                </div>
+              </div>
+
 								<div class="col-sm-3 form-group">
 									<label>Email</label>
 									<input type="text" id="email_input" placeholder="Enter Email" class="form-control" name="email" value="<?php echo $_POST['email']; ?> ">
@@ -296,9 +300,9 @@ $phonecall  = trim($_POST['phonecall']);
                    		 			<div class="radio-inline">
                       				  <label><input type="radio" name="gender" value="female"/>Female</label>
                       				</div>
-								</div>
+								          </div>
                             
-                                <div class="col-sm-6 form-group">
+                        <div class="col-sm-6 form-group">
     								<label>Marital status:</label>
 									<div class="radio-inline">
      			 					<label><input type="radio" name="status" value="married" checked/>Married</label>

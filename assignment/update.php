@@ -34,7 +34,6 @@ if ($value=$_SESSION['id']) {
         $medium .="/";
         $medium .=$profile['phonecall'];
     }
-
     //if update button is clicked
     if($up=$_POST['update']) {            
 
@@ -64,10 +63,9 @@ if ($value=$_SESSION['id']) {
         $repassword = trim($_POST['repassword']);
         $extra      = addslashes($_POST['extra']);
         //counter for error checking
-        $count = 0;   
-     
+        $count = 0;        
         if($_FILES["photo"]["name"]) {
-            $target_dir = "/var/www/html/example/registration/image/$photo";
+            $target_dir = "/var/www/html/project/assignment/image/$photo";
             $target_file = $target_dir . basename($_FILES["photo"]["name"]);
             $photo = basename($_FILES["photo"]["name"]);
             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -88,7 +86,6 @@ if ($value=$_SESSION['id']) {
         }
 
         // validation
-
         if (empty($first)) {
             $error = "<p><strong>*Give your first name</strong></p>";
             echo "<center>{$error}</center>"; 
@@ -470,7 +467,6 @@ function displayVal($field,$profile)
         		</div>
         	</div>
         </div>
-            
 <?php
 require_once "footer.php";
 ?>

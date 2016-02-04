@@ -88,6 +88,7 @@ $(document).ready(function(){
                      $("#status_error").html("");
                      $("#status_input").removeClass("form_error");
                 }
+
             }
             if ((first.length < 3) || (first.length > 30)) {
                 errors = "\n*Should be within 3-30 characters.";
