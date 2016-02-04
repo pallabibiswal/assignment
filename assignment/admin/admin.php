@@ -31,14 +31,13 @@ while($row = mysqli_fetch_assoc($result)) {
 								,$row['suffix'],$row['dob']
 								,$row['email'],$row['employement']
 								,$row['employer'],$row['gender']
-								,$row['status'],$row['photo']
-								,$row['rstreet'],$row['rcity']
+								,$row['status'],$row['rstreet'],$row['rcity']
 								,$row['rstate'],$row['rpin']
 								,$row['rphone'],$row['rfax']
 								,$row['ostreet'],$row['ocity']
 								,$row['ostate'],$row['opin']
 								,$row['ophone'],$row['ofax']
-								,$row['extra']);
+								,$row['extra'],$row['activate']);
 	$i++;
 }
 echo json_encode($responce);

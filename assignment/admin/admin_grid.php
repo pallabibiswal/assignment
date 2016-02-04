@@ -1,3 +1,8 @@
+<?php
+session_start();
+$id = $_SESSION['id'];
+if($id){
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +27,13 @@
 						"Middle Name","Suffix",
 						"Date of Birth","Email",
 						"Employement","Employer","Gender",
-						"Status","Photo","Residential Street",
+						"Status","Residential Street",
 						"Residential City","Residential State",
 						"Residential pin no.","Residential Phone no.",
 						"Residentia Fax no.","Office Street",
 						"Office City","Office State",
 						"Office pin no.","Office Phone no.",
-						"Office Fax no.","Extra","Actions"
+						"Office Fax no.","Extra","Activate","Actions"
 						],
 			colModel: [
 				{ name: "pk_users",align:"right",width:30,editable:true},
@@ -42,7 +47,6 @@
 				{ name: "employer",width:60,editable:true},
 				{ name: "gender",width:50,editable:true},
 				{ name: "status",width:60,editable:true},
-				{ name: "photo",width:60,editable:true},
 				{ name: "rstreet",width:100,editable:true},
 				{ name: "rcity",width:100,editable:true},
 				{ name: "rstate",width:100,editable:true},
@@ -55,9 +59,15 @@
 				{ name: "opin",width:60,editable:true},
 				{ name: "ophone",width:60,editable:true},
 				{ name: "ofax",width:60,editable:true},
-				{ name: "extra",width:300,editable:true},
-				{name:'act',index:'act', width:130,sortable:false}	
-			],
+				{ name: "extra",width:200,editable:true},
+				{ name: "activate",width:50,editable:true,edittype:'checkbox'},
+				{name : 'actions', index: 'actions', formatter:'actions',
+					formatoptions: {
+						    keys: true,
+						    editbutton: { url: 'update.php' },
+						    delOptions: { url: 'delete.php' }
+				               }}
+				],
 			pager: "#perpage",
 			rowNum: 10,
 			rowList: [10,20],
@@ -67,27 +77,21 @@
 			viewrecords: true,
 			gridview: true,
 			caption: "Employee Details",
-			gridComplete: function(){
-				var ids = jQuery("#list_records").jqGrid('getDataIDs');
-				for(var i=0;i<ids.length;i++){
-				var cl = ids[i];
-				be = "<input style='height:22px;width:40px;' type='button' value='Edit' onclick=\"jQuery('#list_records')";
-				be += ".jqGrid('editRow','"+cl+"');\"  />"; 
-				se = "<input style='height:22px;width:40px;' type='button' value='Save' onclick=\"jQuery('#list_records')";
-				se += ".jqGrid('saveRow','"+cl+"');\"  />"; 
-				ce = "<input style='height:22px;width:50px;' type='button' value='Delete' onclick=\"jQuery('#list_records')";
-				ce += ".jqGrid('delRowData','"+cl+"');\" />"; 
-				jQuery("#list_records").jqGrid('setRowData',ids[i],{act:be+se+ce});
-				}	
-			},
 			editurl: "update.php?123"
 		});
-		jQuery("#list_records").jqGrid('navGrid',"#list_records",{edit:false,add:false,del:false})	
+		
 	});
 	</script>
 </head>
 <body>
 <table id="list_records"><tr><td></td></tr></table> 
 <div id="perpage"></div>
+<h3>Click here to <a href="admin_logout.php">logout!</a>
 </body>
 </html>
+<?php
+}
+else{
+	header("Location: admin_login.php");
+}
+?>

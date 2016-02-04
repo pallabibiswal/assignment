@@ -24,6 +24,7 @@
     <script type = "text/javascript" src = "js/login.js?123"></script>
 
     <script type = "text/javascript" src = "js/unique_email.js?123"></script>
+    <script type = "text/javascript" src="admin/admin_js/admin_login.js"></script>
 </head>
 
 <body>
