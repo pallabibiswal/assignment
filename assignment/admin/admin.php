@@ -1,20 +1,35 @@
 <?php 
+/**
+* File Doc Comment
+*
+* PHP version 5
+*
+* @category PHP
+* @package  PHP_CodeSniffer
+* @author   Mindfire Solutions <pallabi.biswal@mindfiresolutions.com>
+* @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+* @link     http://www.mindfiresolutions.com
+*/
 require_once '../dbinfo.php';
-$page = $_POST['page']; 
-$limit = $_POST['rows']; 
-$sidx = $_POST['sidx']; 
-$sord = $_POST['sord']; 
+$page 		   = $_POST['page']; 
+$limit         = $_POST['rows']; 
+$sidx          = $_POST['sidx']; 
+$sord          = $_POST['sord']; 
+$search_field  = $_POST['searchField'];
+$search_string = $_POST['searchString'];
+$search_oper   = $_POST['searchOper'];
+						
 
-if(!$sidx) $sidx =1; 
+if(!$sidx) {
+	$sidx =1;
+} 
 $query = "SELECT COUNT(*) AS count FROM users";
 $result = mysqli_query($db, $query); 
 $row = mysqli_fetch_assoc($result); 
-
+$total_pages = 0; 
 $count = $row['count']; 
 if( $count > 0 && $limit > 0) { 
     $total_pages = ceil($count/$limit); 
-} else { 
-    $total_pages = 0; 
 } 
 if ($page > $total_pages) $page=$total_pages;
 $start = $limit*$page - $limit;

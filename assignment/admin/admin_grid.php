@@ -1,23 +1,21 @@
 <?php
+/**
+* File Doc Comment
+*
+* PHP version 5
+*
+* @category PHP
+* @package  PHP_CodeSniffer
+* @author   Mindfire Solutions <pallabi.biswal@mindfiresolutions.com>
+* @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+* @link     http://www.mindfiresolutions.com
+*/
 session_start();
+require_once "header.php";
 $id = $_SESSION['id'];
-if($id){
+if ($id) {
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Admin page</title>
-	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css' />
-    <link rel='stylesheet' type='text/css' href='http://www.trirand.com/blog/jqgrid/themes/ui.jqgrid.css' />
-	
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	
-	<script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery-ui-custom.min.js'></script>        
-    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/i18n/grid.locale-en.js'></script>
-    <script type='text/javascript' src='http://www.trirand.com/blog/jqgrid/js/jquery.jqGrid.js'></script>
-	
-	<script>
+<script>
 	$(document).ready(function () {
 		$("#list_records").jqGrid({
 			url: "admin.php?123",
@@ -72,26 +70,56 @@ if($id){
 			rowNum: 10,
 			rowList: [10,20],
 			sortname: "pk_users",
+			width : 1165,
+    		height: 800,
+    		shrinkToFit: false,
+    		loadonce: true,
 			sortorder: "asc",
 			height: '100%',
 			viewrecords: true,
 			gridview: true,
+			multiselect: true,
 			caption: "Employee Details",
 			editurl: "update.php?123"
 		});
-		
+		$('#list_records').navGrid('#perpage',
+            { 
+            	edit: true, 
+            	add: false, 
+            	del: true, 
+            	search: true, 
+            	refresh: true, 
+            	view: true, 
+            	position: "left", 
+            	cloneToTop: true 
+            });
 	});
-	</script>
+</script>
 </head>
 <body>
-<table id="list_records"><tr><td></td></tr></table> 
-<div id="perpage"></div>
-<h3>Click here to <a href="admin_logout.php">logout!</a>
-</body>
-</html>
+	<div class="brand">Mindfire Solutions</div>
+    	<!-- Navigation -->
+    	<nav class="navbar navbar-default" role="navigation">
+        	<div class="container">
+            	<ul class="nav navbar-nav">
+            	</ul>
+            </div>
+        </div>
+    	<div class="top-content">
+         	<div class="inner-bg">
+            	<div class="container">
+                	<div class="row">
+                        <div class="form-top">
+							<span id="log_out">Click here to 
+							<a href="admin_logout.php">logout!</a></span>
+							<br/><br/>
+							<table id="list_records">
+							<tr><td></td></tr></table>
+							<div id="perpage"></div>
 <?php
-}
-else{
-	header("Location: admin_login.php");
+echo "<br/><br/>";
+require_once "footer.php";
+} else {
+    header("Location: admin_login.php");
 }
 ?>

@@ -7,7 +7,7 @@ require_once("dbinfo.php");
         $email = $_POST['email'];                                                             
         $password = $_POST['password'];
         //query to fetch id and email to set session and for successful login
-        $q = "SELECT pk_users FROM users WHERE email='$email' AND password='$password' AND activate = '1'";
+        $q = "SELECT pk_users FROM users WHERE email='$email' AND password='$password' AND activate = '1' OR activate = 'Yes' OR activate = 'on'";
         $result = mysqli_query($db,$q);
         if ($result and $row = mysqli_fetch_assoc($result)) 
         {

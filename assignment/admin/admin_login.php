@@ -1,6 +1,18 @@
 <?php
+/**
+* File Doc Comment
+*
+* PHP version 5
+*
+* @category PHP
+* @package  PHP_CodeSniffer
+* @author   Mindfire Solutions <pallabi.biswal@mindfiresolutions.com>
+* @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+* @link     http://www.mindfiresolutions.com
+*/
 session_start();
 require_once "../dbinfo.php";
+require_once "header.php";
 if($_POST['signin']){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -16,30 +28,9 @@ if($_POST['signin']){
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Admin Login</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/business-casual.css" rel="stylesheet">
-
-    <!-- Fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-     <!--<script src="js/jquery.js"></script>
-     <script src="admin/js/admin_login.js"></script>-->
 </head>
-
 <body>
-    <div class="brand">Mindfire Solutions</div>
+<div class="brand">Mindfire Solutions</div>
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -84,16 +75,4 @@ if($_POST['signin']){
             </div>
             
         </div>
- <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
-
+ <?php require_once "footer.php";

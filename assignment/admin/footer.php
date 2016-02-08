@@ -10,12 +10,17 @@
 * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
 * @link     http://www.mindfiresolutions.com
 */
-require_once '../dbinfo.php';
-$res = array();
-$id	= trim($_POST['id']);
-$res['id'] = $id;
-$query = "DELETE FROM `users` WHERE pk_users = '$id'";
-if(mysqli_query($db, $query)){
-	echo json_encode($res);
-}
 ?>
+<footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
